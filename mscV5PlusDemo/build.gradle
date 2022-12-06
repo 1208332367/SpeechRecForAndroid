@@ -1,0 +1,79 @@
+//
+apply plugin: 'com.android.application'
+apply plugin: 'com.chaquo.python'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.iflytek.mscv5plusdemo"
+        minSdkVersion 16
+        targetSdkVersion 30
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+
+        python {
+            buildPython "E:\\Anaconda3\\python.exe"
+            pip {
+                install "xlrd==1.2.0"
+                install "pypinyin"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            //consumerProguardFiles 'proguard-rules-libpython.pro'
+        }
+        debug {
+            minifyEnabled false
+            //consumerProguardFiles 'proguard-rules-libpython.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            java {
+                srcDirs 'src\\main\\java', 'src\\main\\java\\judge', 'src\\main\\java\\com\\iflytek\\speech\\judge'
+            }
+        }
+    }
+
+    allprojects {
+        repositories {
+            google()
+            mavenCentral()
+        }
+    }
+}
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        //python library
+        maven { url "https://chaquo.com/maven" }
+    }
+    dependencies {
+        //版本号请根据自己的gradle插件版本号自行更改
+        classpath 'com.android.tools.build:gradle:4.2.2'
+        //python library
+        classpath "com.chaquo.python:gradle:10.0.1"
+    }
+}
+
+dependencies {
+    implementation files('libs/Msc.jar')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.4.0'
+}
+
+
+
+

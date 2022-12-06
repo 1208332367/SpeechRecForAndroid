@@ -1,0 +1,4 @@
+#Tue Dec 06 13:13:49 GMT+08:00 2022
+base.0=D\:\\projects\\AndroidProject\\SpeechRecForAndroid\\mscV5PlusDemo\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
